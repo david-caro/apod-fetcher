@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "apod-fetcher"
+version = "0.1.0"
+description = "Small script to fetch the astronomical picture of the day"
+authors = ["David Caro <david@greyllama.cc>"]
+license = "AGPL3-or-above"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+requests = "^2.32.3"
+click = "^8.1.7"
+beautifulsoup4 = "^4.12.3"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.4.9"
+mypy = "^1.10.0"
+types-requests = "^2.32.0.20240602"
+types-beautifulsoup4 = "^4.12.0.20240511"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+extend-select = ["I"]
