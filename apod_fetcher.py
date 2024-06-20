@@ -53,7 +53,6 @@ def download_picture_of_the_day(dest_path: Path) -> str:
         logging.info(f"    loaded html dump from {dest_page_path}")
         page_soup = bs4.BeautifulSoup(response_text, "html.parser")
     else:
-
         response = do_get(APOD_URL)
         page_soup = bs4.BeautifulSoup(response.text, "html.parser")
         dest_page_path.write_text(page_soup.prettify())

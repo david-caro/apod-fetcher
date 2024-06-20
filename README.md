@@ -6,6 +6,9 @@ This is just a small script to fetch the current
 
 It will download the images under `~/Images/apod`.
 
+To install you can just run the `utils/install.sh` script (check it out first).
+To do manually, see the next sections.
+
 ## Build as standalone binary
 
 For this you can use [pyinstaller](https://pyinstaller.org/en/stable/):

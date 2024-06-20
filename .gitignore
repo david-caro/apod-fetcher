@@ -3,3 +3,4 @@ build/
 .vscode/
 .mypy_cache
 *.spec
+.ruff_cache
