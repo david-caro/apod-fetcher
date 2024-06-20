@@ -1,0 +1,11 @@
+[Unit]
+Description=Fetch the current astronomy picture of the day and set it as background
+After=network.target
+
+[Service]
+Type=oneshot
+# change this to wherever you installed the standalone binary
+ExecStart=/home/dcaro/bin/apod_fetcher
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,9 @@
+[Unit]
+Description=Run "astronomy picture of the day fetcher" once a day
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=24h
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,5 @@
+dist/
+build/
+.vscode/
+.mypy_cache
+*.spec
