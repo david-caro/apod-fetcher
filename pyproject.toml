@@ -7,7 +7,7 @@ license = "AGPL3-or-above"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">=3.12,<3.13"
 requests = "^2.32.3"
 click = "^8.1.7"
 beautifulsoup4 = "^4.12.3"
@@ -18,6 +18,7 @@ mypy = "^1.10.0"
 types-requests = "^2.32.0.20240602"
 types-beautifulsoup4 = "^4.12.0.20240511"
 pre-commit = "^3.7.1"
+pyinstaller = "^6.8.0"
 
 [build-system]
 requires = ["poetry-core"]
