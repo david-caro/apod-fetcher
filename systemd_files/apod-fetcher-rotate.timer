@@ -1,0 +1,9 @@
+[Unit]
+Description=Run "astronomy picture of the day fetcher" to rotate the backgrounds
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=10min
+
+[Install]
+WantedBy=timers.target

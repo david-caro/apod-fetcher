@@ -19,9 +19,12 @@ main() {
     [[ -d "$SYSTEMD_PATH" ]] || mkdir -p "$SYSTEMD_PATH"
     cp systemd_files/* "$SYSTEMD_PATH/"
     sed -i -e "s|^ExecStart.*|ExecStart=$BIN_PATH/apod_fetcher|" "$SYSTEMD_PATH/apod-fetcher.service"
+    sed -i -e "s|^ExecStart.*|ExecStart=$BIN_PATH/apod_fetcher --rotate|" "$SYSTEMD_PATH/apod-fetcher-rotate.service"
     systemctl --user daemon-reload
     systemctl --user enable apod-fetcher.timer
     systemctl --user start apod-fetcher.timer
+    systemctl --user enable apod-fetcher-rotate.timer
+    systemctl --user start apod-fetcher-rotate.timer
 }
 
 
