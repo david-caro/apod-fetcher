@@ -63,7 +63,7 @@ def download_picture_of_the_day(dest_path: Path, date: str) -> str:
         dest_page_path.write_text(page_soup.prettify())
         logging.info(f"    saved html dump to {dest_page_path}")
 
-    pic_link = page_soup.find_all("a", href=re.compile("image/.*jpg$"))[0]
+    pic_link = page_soup.find_all("a", href=re.compile("image/.*(jpg|png)$"))[0]
     with do_get(f"{APOD_BASE_URL}/{pic_link['href']}", stream=True) as pic_response:
         with dest_path.open("wb") as dest_path_df:
             shutil.copyfileobj(pic_response.raw, dest_path_df)
