@@ -126,7 +126,36 @@ def get_picture(
     return dest_path
 
 
-def update_background(bg_path: Path, force: bool = False) -> None:
+def update_background(bg_path: Path) -> None:
+    if os.environ.get("XDG_CURRENT_DESKTOP", "none").lower() == "gnome":
+        update_background_gnome(bg_path=bg_path)
+    else:
+        update_background_sway(bg_path=bg_path)
+
+
+def update_background_gnome(bg_path: Path) -> None:
+    change_setting_command = [
+        "gsettings",
+        "set",
+        "org.gnome.desktop.background",
+    ]
+    subprocess.Popen(
+        change_setting_command
+        + [
+            "picture-uri",
+            f"file://{bg_path.expanduser().resolve()}",
+        ]
+    )
+    subprocess.Popen(
+        change_setting_command
+        + [
+            "picture-uri-dark",
+            f"file://{bg_path.expanduser().resolve()}",
+        ]
+    )
+
+
+def update_background_sway(bg_path: Path) -> None:
     subprocess.run(["pkill", "-f", "swaybg"])
     subprocess.Popen(
         [
@@ -185,7 +214,7 @@ def main(rotate: bool, force: bool, date: str) -> None:
 
     try:
         pic_path = get_picture(download_dir=DOWNLOAD_DIR, force=force, date=date)
-        update_background(bg_path=pic_path, force=force)
+        update_background(bg_path=pic_path)
         return
 
     except NoNewBG as error:
