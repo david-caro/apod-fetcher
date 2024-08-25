@@ -87,8 +87,6 @@ def add_text(src_image: Path, dest_image: Path, text: str) -> None:
             f"{FONT_SIZE}",
             "-fill",
             "yellow",
-            "-font",
-            "Arial",
             "-gravity",
             "center",
             "-draw",
@@ -126,10 +124,36 @@ def get_picture(
     return dest_path
 
 
+def on_gnome() -> bool:
+    logging.info("Checking window manager...")
+    if os.environ.get("XDG_CURRENT_DESKTOP", "").lower() == "gnome":
+        logging.info("   got it from XDG_CURRENT_DESKTOP: gnome")
+        return True
+
+    elif os.environ.get("XDG_CURRENT_DESKTOP", "") == "":
+        # fallback, as the XDG_CURRENT_DESKTOP MIGHT NOT BE SET
+        try:
+            subprocess.check_call(
+                ["pgrep", "sway"],
+            )
+        except subprocess.CalledProcessError:
+            return True
+
+        return False
+
+    logging.info(
+        "   got it from XDG_CURRENT_DESKTOP: %s", os.environ["XDG_CURRENT_DESKTOP"]
+    )
+    return False
+
+
 def update_background(bg_path: Path) -> None:
-    if os.environ.get("XDG_CURRENT_DESKTOP", "none").lower() == "gnome":
+    logging.info("updating background")
+    if on_gnome():
+        logging.info("Using gnome")
         update_background_gnome(bg_path=bg_path)
     else:
+        logging.info("Using sway")
         update_background_sway(bg_path=bg_path)
 
 
